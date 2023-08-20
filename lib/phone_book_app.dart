@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phone_book/modules/contacts/bloc/contacts_list_bloc.dart';
-import 'package:phone_book/common/resources/app_config.dart';
+import 'package:phone_book/common/constants/app_config.dart';
 import 'package:phone_book/common/router/app_router.dart';
 import 'package:phone_book/common/style/appTheme/app_theme.dart';
 import 'package:phone_book/common/ui/widgets/internet_error_widget.dart';
@@ -25,7 +25,7 @@ class PhoneBookApp extends StatelessWidget {
           lazy: false,
           create: (BuildContext createContext) => AppRouter(),
         ),
-        ChangeNotifierProvider(create: (context) => ContactsListBloc()),
+        ChangeNotifierProvider(create: (context) => ContactsListBloc()..loadContacts()),
       ],
       child: EasyLocalization(
         supportedLocales: AppConfig.supportedLocales,
