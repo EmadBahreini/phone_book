@@ -14,51 +14,41 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class PhoneBookApp extends StatelessWidget {
   const PhoneBookApp({Key? key}) : super(key: key);
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
+  // static final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
   @override
-  Widget build(BuildContext context) {
-    final botToastBuilder = BotToastInit();
-
-    return MultiProvider(
-      providers: [
-        Provider<AppRouter>(
-          lazy: false,
-          create: (BuildContext createContext) => AppRouter(),
-        ),
-        ChangeNotifierProvider(create: (context) => ContactsListBloc()..loadContacts()),
-      ],
-      child: EasyLocalization(
-        supportedLocales: AppConfig.supportedLocales,
-        path: AppConfig.localePath,
-        startLocale: AppConfig.startLocale,
-        fallbackLocale: AppConfig.startLocale,
-        useOnlyLangCode: true,
-        child: RefreshConfiguration(
-          child: Builder(
-            builder: (context) {
-              final GoRouter router = context.read<AppRouter>().router;
-              return MaterialApp.router(
-                title: AppConfig.name,
-                theme: AppTheme.light,
-                supportedLocales: context.supportedLocales,
-                localizationsDelegates: context.localizationDelegates,
-                locale: context.locale,
-                routeInformationParser: router.routeInformationParser,
-                routerDelegate: router.routerDelegate,
-                debugShowCheckedModeBanner: false,
-                routeInformationProvider: router.routeInformationProvider,
-                builder: (context, child) {
-                  // child = myBuilder(context, child); //do something
-                  var chil = botToastBuilder(context, child);
-                  return chil;
-                },
-              );
-            },
+  Widget build(BuildContext context) => MultiProvider(
+        providers: [
+          Provider<AppRouter>(
+            lazy: false,
+            create: (BuildContext createContext) => AppRouter(),
+          ),
+          ChangeNotifierProvider(create: (context) => ContactsListBloc()..loadContacts()),
+        ],
+        child: EasyLocalization(
+          supportedLocales: AppConfig.supportedLocales,
+          path: AppConfig.localePath,
+          startLocale: AppConfig.startLocale,
+          fallbackLocale: AppConfig.startLocale,
+          useOnlyLangCode: true,
+          child: RefreshConfiguration(
+            child: Builder(
+              builder: (context) {
+                final GoRouter router = context.read<AppRouter>().router;
+                return MaterialApp.router(
+                  title: AppConfig.name,
+                  theme: AppTheme.light,
+                  supportedLocales: context.supportedLocales,
+                  localizationsDelegates: context.localizationDelegates,
+                  locale: context.locale,
+                  routerConfig: router,
+                  debugShowCheckedModeBanner: false,
+                  builder: BotToastInit(),
+                );
+              },
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   Widget? myBuilder(BuildContext context, Widget? child) {
     return MediaQuery(

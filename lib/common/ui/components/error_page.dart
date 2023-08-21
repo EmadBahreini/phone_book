@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phone_book/common/style/appTheme/app_theme_helper.dart';
 import 'package:phone_book/common/style/colorPalette/color_palette_helper.dart';

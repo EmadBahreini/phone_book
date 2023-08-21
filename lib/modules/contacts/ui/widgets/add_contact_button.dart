@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../common/router/app_router.dart';
 
 class AddContactWidget extends StatelessWidget {
   const AddContactWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-        onPressed: () {},
+        onPressed: () => context.go('/${R.createContact}'),
         style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
             backgroundColor: MaterialStateProperty.resolveWith((states) => Theme.of(context).primaryColor),
             overlayColor: MaterialStateProperty.resolveWith((states) => states.contains(MaterialState.disabled)
