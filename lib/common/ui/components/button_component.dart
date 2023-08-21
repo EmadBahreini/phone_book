@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:phone_book/common/style/colorPalette/color_palette_helper.dart';
-import 'package:phone_book/common/ui/components/switcher_component.dart';
+import 'package:phone_book/common/ui/components/simple_switcher_component.dart';
 import 'package:phone_book/common/utils/logs/log_helper.dart';
 
 import '../widgets/loading_widget.dart';
@@ -131,7 +131,7 @@ class CinButtonState extends State<ButtonComponent> {
                     : widget.enabled
                         ? context.colors.textCaption
                         : context.colors.textDisabled);
-            return SwitcherComponent(
+            return SimpleSwitcherComponent(
                 child: finalLoading
                     ? Center(
                         key: const Key('loading'),

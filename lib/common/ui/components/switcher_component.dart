@@ -1,34 +1,23 @@
 import 'package:flutter/material.dart';
 
-enum SwitcherAnimation { scale, rotate, fade }
-
 class SwitcherComponent extends StatelessWidget {
-  const SwitcherComponent(
-      {Key? key,
-      this.child,
-      this.switcherAnimation = SwitcherAnimation.scale,
-      this.duration,
-      this.alignment = Alignment.center,
-      this.switchInCurve = Curves.linear,
-      this.switchOutCurve = Curves.linear})
-      : super(key: key);
-
-  final Widget? child;
-  final SwitcherAnimation switcherAnimation;
-  final Duration? duration;
-  final Alignment alignment;
-  final Curve switchInCurve;
-  final Curve switchOutCurve;
-
+  const SwitcherComponent({
+    required this.statement,
+    required this.firstChild,
+    required this.secondChild,
+    this.curve = Curves.easeIn,
+    this.duration = const Duration(milliseconds: 1000),
+    super.key,
+  });
+  final bool statement;
+  final Widget firstChild;
+  final Widget secondChild;
+  final Curve curve;
+  final Duration duration;
   @override
   Widget build(BuildContext context) => AnimatedSwitcher(
-      duration: duration ?? const Duration(milliseconds: 220),
-      switchInCurve: switchInCurve,
-      switchOutCurve: switchOutCurve,
-      transitionBuilder: (Widget child, Animation<double> animation) => switcherAnimation == SwitcherAnimation.scale
-          ? ScaleTransition(scale: animation, alignment: alignment, child: child)
-          : switcherAnimation == SwitcherAnimation.rotate
-              ? RotationTransition(turns: animation, child: child)
-              : FadeTransition(opacity: animation, child: child),
-      child: child);
+        duration: duration,
+        switchInCurve: curve,
+        child: statement ? firstChild : secondChild,
+      );
 }

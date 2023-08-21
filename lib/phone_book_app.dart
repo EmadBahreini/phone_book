@@ -48,9 +48,9 @@ class PhoneBookApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 routeInformationProvider: router.routeInformationProvider,
                 builder: (context, child) {
-                  child = myBuilder(context, child); //do something
-                  child = botToastBuilder(context, child);
-                  return child;
+                  // child = myBuilder(context, child); //do something
+                  var chil = botToastBuilder(context, child);
+                  return chil;
                 },
               );
             },

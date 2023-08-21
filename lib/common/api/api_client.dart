@@ -53,7 +53,7 @@ class ApiClient {
   }
 
   Future<void> onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) async {
-    log(response);
+    wtfLog(response.data);
     handler.next(response);
   }
 }
