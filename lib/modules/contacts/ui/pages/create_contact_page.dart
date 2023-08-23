@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 import 'package:phone_book/common/style/colorPalette/color_palette_helper.dart';
 import 'package:phone_book/common/ui/components/button_component.dart';
 import 'package:phone_book/common/ui/components/page_component.dart';
@@ -31,9 +32,9 @@ class CreateContactPage extends StatelessWidget {
                   notes: data?['note'],
                 );
                 if (await Provider.of<ContactsBloc>(context, listen: false).createContact(contact)) {
-                  // if (context.mounted) {
-                  //   context.pop();
-                  // }
+                  if (context.mounted) {
+                    context.pop();
+                  }
                 }
               }
             },
@@ -135,7 +136,7 @@ class CreateContactPage extends StatelessWidget {
                         hasBorder: true,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
-                        // validators: [FormBuilderValidators.email()],
+                        validators: [FormBuilderValidators.email()],
                       ),
                     )
                   ],

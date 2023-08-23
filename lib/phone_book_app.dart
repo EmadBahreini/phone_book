@@ -14,7 +14,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class PhoneBookApp extends StatelessWidget {
   const PhoneBookApp({Key? key}) : super(key: key);
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
-  // static final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) => MultiProvider(
         providers: [

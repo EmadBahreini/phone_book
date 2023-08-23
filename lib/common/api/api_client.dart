@@ -48,7 +48,6 @@ class ApiClient {
   }
 
   void onRequest(RequestOptions requestOptions, RequestInterceptorHandler handler) {
-    // wtfLog(requestOptions.data);
     handler.next(requestOptions);
   }
 
