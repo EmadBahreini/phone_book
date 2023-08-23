@@ -34,8 +34,8 @@ class AppTheme {
     //! AppBar
     appBarTheme: AppBarTheme(
       elevation: 4,
-      shadowColor: ColorPalette.light.toolbarShadow,
-      color: ColorPalette.light.scaffoldBackground,
+      // shadowColor: ColorPalette.light.toolbarShadow,
+      color: ColorPalette.light.primary.withOpacity(0.3),
       iconTheme: IconThemeData(color: ColorPalette.light.textPrimary, size: 18),
       actionsIconTheme: IconThemeData(color: ColorPalette.light.textPrimary),
       titleTextStyle: TextTheme(
@@ -69,7 +69,7 @@ class AppTheme {
         shadowColor: MaterialStateProperty.all(ColorPalette.light.primary.withOpacity(0.6)),
         overlayColor: MaterialStateProperty.all(ColorPalette.light.splash),
         shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
       ),
     ),
@@ -77,7 +77,7 @@ class AppTheme {
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
         foregroundColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) => ColorPalette.light.primary),

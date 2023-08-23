@@ -1,4 +1,4 @@
 class Api {
   //! Contacts
-  static const String getContactsList = '/contacts';
+  static const String contacts = '/contacts';
 }

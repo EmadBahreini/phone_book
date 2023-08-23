@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phone_book/common/ui/components/simple_app_bar.dart';
+import 'package:phone_book/common/style/colorPalette/color_palette_helper.dart';
 import 'package:phone_book/common/ui/components/switcher_component.dart';
 import 'package:phone_book/common/utils/logs/log_helper.dart';
 import 'package:phone_book/modules/contacts/bloc/contacts_bloc.dart';
@@ -15,11 +15,10 @@ class ContactsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: const SimpleAppBar(
-          'STDev Phone Book',
-          elevation: 12,
-          haveLeading: false,
+        appBar: AppBar(
+          backgroundColor: context.colors.primary.withOpacity(0.2),
           centerTitle: true,
+          title: const Text('STDev Phone Book'),
         ),
         body: SmartRefresher(
           physics: const BouncingScrollPhysics(),

@@ -3,7 +3,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:phone_book/modules/contacts/bloc/contacts_list_bloc.dart';
+import 'package:phone_book/modules/contacts/bloc/contacts_bloc.dart';
 import 'package:phone_book/common/constants/app_config.dart';
 import 'package:phone_book/common/router/app_router.dart';
 import 'package:phone_book/common/style/appTheme/app_theme.dart';
@@ -22,7 +22,7 @@ class PhoneBookApp extends StatelessWidget {
             lazy: false,
             create: (BuildContext createContext) => AppRouter(),
           ),
-          ChangeNotifierProvider(create: (context) => ContactsListBloc()..loadContacts()),
+          ChangeNotifierProvider(create: (context) => ContactsBloc()..loadContacts()),
         ],
         child: EasyLocalization(
           supportedLocales: AppConfig.supportedLocales,

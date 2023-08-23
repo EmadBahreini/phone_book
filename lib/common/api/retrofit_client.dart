@@ -12,6 +12,11 @@ abstract class RetrofitClient {
   factory RetrofitClient({required Dio dio}) => _RetrofitClient(dio);
 
   //! Contacts
-  @GET(Api.getContactsList)
+  @GET(Api.contacts)
   Future<List<Contact>?> getContactsList();
+
+  @POST(Api.contacts)
+  Future<Contact> createContact({
+    @Body() required Contact contact,
+  });
 }

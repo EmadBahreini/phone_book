@@ -1,4 +1,8 @@
 {
     "Hi": "HI",
-    "back_to_home": "Back To Home"
+    "back_to_home": "Back To Home",
+    "create_contact": "Create Contact",
+    "add_picture": "Add picture",
+    "is_required": "is required",
+    "required_field": "Field is required"
 }

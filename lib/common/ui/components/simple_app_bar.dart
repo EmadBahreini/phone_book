@@ -13,6 +13,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle = false,
     this.appbarBotom,
     this.backgroundColor,
+    this.haveLeading = true,
   });
   final String? title;
   final Widget? titleWidget;
@@ -21,7 +22,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double toolbarHeight;
   final PreferredSizeWidget? appbarBotom;
   final bool centerTitle;
-
+  final bool haveLeading;
   final Color? backgroundColor;
 
   @override
@@ -32,10 +33,11 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: titleWidget ??
             Text(
               title ?? '',
-              style: Theme.of(context).textTheme.subtitle2,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
-        leading:
-            IconButton(icon: Icon(Icons.arrow_back_ios_rounded, size: 20), onPressed: () => Navigator.pop(context)),
+        leading: haveLeading
+            ? IconButton(icon: const Icon(Icons.close, size: 20), onPressed: () => Navigator.pop(context))
+            : null,
         actions: actions,
         elevation: elevation,
         shadowColor: ColorPalette.of(context).shadow.withOpacity(0.30),

@@ -2,7 +2,6 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phone_book/modules/contacts/ui/pages/create_contact_page.dart';
-import 'package:phone_book/phone_book_app.dart';
 import 'package:phone_book/modules/contacts/ui/pages/contacts_details_page.dart';
 
 import '../../modules/contacts/ui/pages/contacts_list._page.dart';
@@ -28,7 +27,7 @@ class AppRouter {
         path: R.contactsList,
         pageBuilder: (state) => ContactsListPage(),
         routes: [
-          _route(path: R.createContact, pageBuilder: (state) => const CreateContactPage()),
+          _route(path: R.createContact, pageBuilder: (state) => CreateContactPage()),
           _route(
             path: R.contactsDetails,
             pageBuilder: (state) => ContactsDetailsPage(

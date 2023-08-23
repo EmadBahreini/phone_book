@@ -91,7 +91,7 @@ class CinButtonState extends State<ButtonComponent> {
               : null,
           style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
                 elevation: widget.disableElevation
-                    ? MaterialStateProperty.all(null)
+                    ? MaterialStateProperty.all(0)
                     : MaterialStateProperty.resolveWith((Set<MaterialState> states) {
                         if (widget.type == ButtonType.secondary || finalLoading || !widget.enabled) {
                           return 0;
@@ -104,6 +104,7 @@ class CinButtonState extends State<ButtonComponent> {
                           return 6;
                         }
                       }),
+                overlayColor: widget.disableElevation ? MaterialStateProperty.all(null) : null,
                 backgroundColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) =>
                     states.contains(MaterialState.disabled)
                         ? (widget.type == ButtonType.primary
@@ -116,7 +117,7 @@ class CinButtonState extends State<ButtonComponent> {
                 shadowColor: MaterialStateProperty.all((widget.color ?? context.colors.primary).withOpacity(0.6)),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(20),
                     side: (widget.enabled && !finalLoading)
                         ? widget.borderSide
                         : widget.borderSide.copyWith(color: context.colors.divider),
@@ -132,28 +133,29 @@ class CinButtonState extends State<ButtonComponent> {
                         ? context.colors.textCaption
                         : context.colors.textDisabled);
             return SimpleSwitcherComponent(
-                child: finalLoading
-                    ? Center(
-                        key: const Key('loading'),
-                        child: LoadingWidget(color: foregroundColor, size: widget.height / 3),
-                      )
-                    : (widget.child ??
-                        Center(
-                          key: const Key('normal'),
-                          child: Wrap(
-                            spacing: 8,
-                            runSpacing: 4,
-                            children: <Widget>[
-                              if (widget.icon != null) Icon(widget.icon, size: widget.iconSize, color: foregroundColor),
-                              if (widget.text != null)
-                                Text(widget.text!,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelLarge!
-                                        .copyWith(color: foregroundColor, fontWeight: FontWeight.normal)),
-                            ],
-                          ),
-                        )));
+              child: finalLoading
+                  ? Center(
+                      key: const Key('loading'),
+                      child: LoadingWidget(color: foregroundColor, size: widget.height / 3),
+                    )
+                  : (widget.child ??
+                      Center(
+                        key: const Key('normal'),
+                        child: Wrap(
+                          spacing: 8,
+                          runSpacing: 4,
+                          children: <Widget>[
+                            if (widget.icon != null) Icon(widget.icon, size: widget.iconSize, color: foregroundColor),
+                            if (widget.text != null)
+                              Text(widget.text!,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge!
+                                      .copyWith(color: foregroundColor, fontWeight: FontWeight.normal)),
+                          ],
+                        ),
+                      )),
+            );
           }),
         ),
       );
