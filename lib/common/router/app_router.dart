@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:phone_book/modules/contacts/models/contact.dart';
 import 'package:phone_book/modules/contacts/ui/pages/create_contact_page.dart';
 import 'package:phone_book/modules/contacts/ui/pages/contacts_details_page.dart';
 
@@ -9,8 +10,8 @@ import '../ui/components/error_page.dart';
 
 class R {
   static const String contactsList = '/';
-  static const String createContact = 'create';
-  static const String contactsDetails = ':cId';
+  static const String createContact = '/create';
+  static const String contactsDetails = '/details';
 }
 
 class AppRouter {
@@ -27,11 +28,11 @@ class AppRouter {
         path: R.contactsList,
         pageBuilder: (state) => ContactsListPage(),
         routes: [
-          _route(path: R.createContact, pageBuilder: (state) => CreateContactPage()),
+          _route(path: R.createContact.replaceAll('/', ''), pageBuilder: (state) => CreateContactPage()),
           _route(
-            path: R.contactsDetails,
+            path: R.contactsDetails.replaceAll('/', ''),
             pageBuilder: (state) => ContactsDetailsPage(
-              contactId: state.pathParameters['cId'] as String,
+              contact: state.extra as Contact,
             ),
           ),
         ],

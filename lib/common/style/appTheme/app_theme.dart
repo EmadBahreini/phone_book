@@ -5,25 +5,17 @@ import '../colorPalette/color_palette.dart';
 class AppTheme {
   static final ThemeData light = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    brightness: Brightness.light,
-    // accentColorBrightness: Brightness.dark,
-    // primaryColorBrightness: Brightness.dark,
+    useMaterial3: true,
     colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ColorPalette.light.primary),
     primaryColor: ColorPalette.light.primary,
     splashColor: ColorPalette.light.splash,
     highlightColor: Colors.transparent,
-    // backgroundColor: ColorPalette.light.background,
-    canvasColor: ColorPalette.light.background,
     scaffoldBackgroundColor: ColorPalette.light.scaffoldBackground,
-    // buttonColor: ColorPalette.light.primary,
-    // errorColor: ColorPalette.light.error,
     dividerColor: ColorPalette.light.divider,
-    // toggleableActiveColor: ColorPalette.light.primary,
-    shadowColor: ColorPalette.light.shadow,
     hintColor: ColorPalette.light.textSecondary,
     disabledColor: ColorPalette.light.disabled,
     primaryColorDark: ColorPalette.light.primary.dark,
-    primaryColorLight: ColorPalette.light.primary.light,
+    primaryColorLight: ColorPalette.light.primary.withOpacity(0.5),
     cardColor: ColorPalette.light.scaffoldBackground,
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: ColorPalette.light.cursor,
@@ -35,12 +27,16 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       elevation: 4,
       // shadowColor: ColorPalette.light.toolbarShadow,
-      color: ColorPalette.light.primary.withOpacity(0.3),
+      // color: ColorPalette.light.primary.withOpacity(0.3),
       iconTheme: IconThemeData(color: ColorPalette.light.textPrimary, size: 18),
       actionsIconTheme: IconThemeData(color: ColorPalette.light.textPrimary),
       titleTextStyle: TextTheme(
-        titleLarge: Typography.englishLike2018.titleSmall!.copyWith(
-            height: 1.5, letterSpacing: 0, color: ColorPalette.light.textPrimary, fontWeight: FontWeight.w900),
+        titleLarge: Typography.englishLike2021.titleSmall!.copyWith(
+          height: 1.5,
+          letterSpacing: 0,
+          color: ColorPalette.light.textPrimary,
+          fontWeight: FontWeight.w900,
+        ),
       ).titleLarge,
       titleSpacing: 0,
     ),

@@ -6,5 +6,8 @@
   "is_required": "is required",
   "required_field": "Field is required",
   "no_contact": "There is no contact to show!",
-  "try_add": "Try to add one!"
+  "try_add": "Try to add one!",
+  "open_link_error": "Can not open the link",
+  "phone_error": "Phone number is invalid",
+  "contact_info": "Contact info"
 }

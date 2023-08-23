@@ -16,7 +16,10 @@ class CreateContactPage extends StatelessWidget {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) => PageComponent(
-        title: 'create_contact'.tr(),
+        widgetTitle: Text(
+          'create_contact'.tr(),
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
         appBarActions: [
           ButtonComponent(
             margin: const EdgeInsets.fromLTRB(0, 12, 16, 4),
@@ -40,10 +43,7 @@ class CreateContactPage extends StatelessWidget {
             },
             width: 90,
             disableElevation: true,
-            child: const Padding(
-              padding: EdgeInsets.only(bottom: 3),
-              child: Text('Save'),
-            ),
+            child: const Text('Save'),
           ),
         ],
         body: SingleChildScrollView(
@@ -53,10 +53,11 @@ class CreateContactPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Center(
+                Center(
                   child: CircleAvatar(
+                    backgroundColor: context.colors.primary.dark,
                     radius: 60,
-                    child: Icon(
+                    child: const Icon(
                       Icons.add_photo_alternate_outlined,
                       size: 32,
                     ),
