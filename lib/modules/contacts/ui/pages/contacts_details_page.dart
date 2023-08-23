@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:phone_book/common/style/colorPalette/color_palette_helper.dart';
 import 'package:phone_book/common/ui/components/cached_image_component.dart';
 import 'package:phone_book/common/ui/components/page_component.dart';
+import 'package:phone_book/common/ui/widgets/loading_widget.dart';
+import 'package:phone_book/modules/contacts/bloc/contacts_bloc.dart';
 import 'package:phone_book/modules/contacts/models/contact.dart';
 import 'package:phone_book/modules/contacts/ui/widgets/contact_detail_buttons_row.dart';
 import 'package:phone_book/modules/contacts/ui/widgets/contact_info_widget.dart';
+import 'package:provider/provider.dart';
 
 class ContactsDetailsPage extends StatelessWidget {
   const ContactsDetailsPage({required this.contact, Key? key}) : super(key: key);
@@ -22,13 +26,50 @@ class ContactsDetailsPage extends StatelessWidget {
               size: 24,
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.more_vert,
-              size: 24,
+          MenuAnchor(
+            builder: (context, controller, child) => IconButton(
+              onPressed: () {
+                if (controller.isOpen) {
+                  controller.close();
+                } else {
+                  controller.open();
+                }
+              },
+              icon: const Icon(
+                Icons.more_vert,
+                size: 24,
+              ),
             ),
-          ),
+            menuChildren: [
+              ListTile(
+                enabled: !context.select<ContactsBloc, bool>((bloc) => bloc.deleteLoading),
+                title: Padding(
+                  padding: const EdgeInsets.only(right: 80.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Delete',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: context.colors.error.dark),
+                      ),
+                      const SizedBox(width: 8),
+                      if (context.select<ContactsBloc, bool>((bloc) => bloc.deleteLoading)) const LoadingWidget()
+                    ],
+                  ),
+                ),
+                onTap: () async {
+                  if (await Provider.of<ContactsBloc>(context, listen: false).deleteContact(contact)) {
+                    if (context.mounted) {
+                      context.pop();
+                    }
+                  }
+                },
+              ),
+              MenuItemButton(
+                child: const Text('Share'),
+                onPressed: () {},
+              ),
+            ],
+          )
         ],
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),

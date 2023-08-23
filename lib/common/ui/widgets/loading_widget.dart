@@ -1,10 +1,12 @@
 import 'dart:math' as math show sin, pi;
 import 'package:flutter/widgets.dart';
+import 'package:phone_book/common/style/colorPalette/color_palette.dart';
+import 'package:phone_book/common/style/colorPalette/color_palette_helper.dart';
 
 class LoadingWidget extends StatefulWidget {
   const LoadingWidget({
     super.key,
-    this.color = const Color(0xff377DFF),
+    this.color,
     this.size = 30.0,
     // this.itemBuilder,
     this.duration = const Duration(milliseconds: 900),
@@ -55,8 +57,12 @@ class _LoadingWidgetState extends State<LoadingWidget> with SingleTickerProvider
         ),
       );
 
-  Widget _itemBuilder(int index) =>
-      DecoratedBox(decoration: BoxDecoration(color: widget.color, shape: BoxShape.circle));
+  Widget _itemBuilder(int index) => DecoratedBox(
+        decoration: BoxDecoration(
+          color: widget.color ?? context.colors.primary,
+          shape: BoxShape.circle,
+        ),
+      );
 }
 
 class DelayTween extends Tween<double> {

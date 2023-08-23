@@ -9,6 +9,7 @@ class ContactsBloc extends ChangeNotifier {
   List<Contact> contactsList = [];
   bool loading = false;
   bool createLoading = false;
+  bool deleteLoading = false;
 
   Future<void> loadContacts() async {
     loading = true;
@@ -51,6 +52,34 @@ class ContactsBloc extends ChangeNotifier {
       errorLog(e);
     }
     createLoading = false;
+    notifyListeners();
+    return false;
+  }
+
+  Future<bool> deleteContact(Contact contact) async {
+    deleteLoading = true;
+    notifyListeners();
+    try {
+      await ApiClient().retrofitClient.deleteContact(contact.id).then((value) {
+        infoLog(value.toJson());
+        Toast.show('Contact deleted successfully!', type: ToastType.success);
+        deleteLoading = false;
+        loadContacts();
+      }).catchError((Object obj) {
+        switch (obj.runtimeType) {
+          case DioException:
+            final res = (obj as DioException).response;
+            infoLog("Got error : ${res?.statusCode} -> ${res?.statusMessage}");
+            break;
+          default:
+            break;
+        }
+      });
+      return true;
+    } catch (e) {
+      errorLog(e);
+    }
+    deleteLoading = false;
     notifyListeners();
     return false;
   }

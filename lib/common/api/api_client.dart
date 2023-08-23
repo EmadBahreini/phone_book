@@ -48,6 +48,7 @@ class ApiClient {
   }
 
   void onRequest(RequestOptions requestOptions, RequestInterceptorHandler handler) {
+    infoLog(requestOptions.data);
     handler.next(requestOptions);
   }
 
