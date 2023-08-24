@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:label="phone_book"
+        android:label="STDev phone Book"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

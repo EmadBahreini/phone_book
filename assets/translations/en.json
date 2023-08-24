@@ -10,5 +10,6 @@
   "open_link_error": "Can not open the link",
   "phone_error": "Phone number is invalid",
   "contact_info": "Contact info",
-  "edit_contact": "Edit contact"
+  "edit_contact": "Edit contact",
+  "app_title": "STDev Phone Book"
 }

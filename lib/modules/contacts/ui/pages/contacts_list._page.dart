@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:phone_book/common/ui/components/simple_app_bar.dart';
 import 'package:phone_book/common/ui/components/switcher_component.dart';
@@ -15,9 +16,13 @@ class ContactsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: const SimpleAppBar(
-          'STDev Phone Book',
+        appBar: SimpleAppBar(
+          'app_title'.tr(),
           elevation: 12,
+          titleWidget: Text(
+            'app_title'.tr(),
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           haveLeading: false,
           centerTitle: true,
         ),
