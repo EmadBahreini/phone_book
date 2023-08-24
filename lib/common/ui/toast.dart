@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:phone_book/common/ui/widgets/loading_widget.dart';
 
 import '../style/colorPalette/color_palette.dart';
 
@@ -100,6 +101,29 @@ class Toast {
       ),
     );
   }
+
+  static void showLoading() => BotToast.showCustomLoading(
+        useSafeArea: false,
+        clickClose: false,
+        enableKeyboardSafeArea: false,
+        toastBuilder: (_) => BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              color: ColorPalette.light.primary.dark.withOpacity(0.5),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+            child: LoadingWidget(
+              color: ColorPalette.light.white,
+            ),
+          ),
+        ),
+        ignoreContentClick: true,
+      );
 
   static Duration getDuration(String? text) {
     int milliseconds = ((text?.length ?? 0) * 48).round();

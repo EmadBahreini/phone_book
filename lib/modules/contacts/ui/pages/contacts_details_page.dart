@@ -11,8 +11,9 @@ import 'package:phone_book/modules/contacts/ui/widgets/contact_info_widget.dart'
 import 'package:provider/provider.dart';
 
 class ContactsDetailsPage extends StatelessWidget {
-  const ContactsDetailsPage({required this.contact, Key? key}) : super(key: key);
+  ContactsDetailsPage({required this.contact, Key? key}) : super(key: key);
   final Contact contact;
+  final MenuController controller = MenuController();
   @override
   Widget build(BuildContext context) => PageComponent(
         alwaysElevation: true,
@@ -27,6 +28,7 @@ class ContactsDetailsPage extends StatelessWidget {
             ),
           ),
           MenuAnchor(
+            controller: controller,
             builder: (context, controller, child) => IconButton(
               onPressed: () {
                 if (controller.isOpen) {
@@ -57,6 +59,7 @@ class ContactsDetailsPage extends StatelessWidget {
                   ),
                 ),
                 onTap: () async {
+                  controller.close();
                   if (await Provider.of<ContactsBloc>(context, listen: false).deleteContact(contact)) {
                     if (context.mounted) {
                       context.pop();

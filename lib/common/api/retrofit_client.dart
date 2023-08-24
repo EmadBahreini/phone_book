@@ -21,6 +21,6 @@ abstract class RetrofitClient {
   });
   @DELETE(Api.deleteContact)
   Future<Contact> deleteContact(
-    @Path() int? contactId,
+    @Path() String? contactId,
   );
 }

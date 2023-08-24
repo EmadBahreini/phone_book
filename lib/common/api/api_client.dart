@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:phone_book/common/api/retrofit_client.dart';
 import 'package:phone_book/common/utils/logs/log_helper.dart';
+import 'package:talker_dio_logger/talker_dio_logger.dart';
+import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
 
+import '../../main.dart';
 import '../constants/constants.dart';
 
 class ApiClient {
@@ -31,7 +34,14 @@ class ApiClient {
           onResponse: onResponse,
           onError: onError,
         ),
-      );
+      )
+      ..interceptors.add(TalkerDioLogger(
+        talker: talker,
+        settings: const TalkerDioLoggerSettings(
+          printRequestHeaders: true,
+          printResponseHeaders: true,
+        ),
+      ));
 
     retrofitClient = RetrofitClient(dio: dio);
   }

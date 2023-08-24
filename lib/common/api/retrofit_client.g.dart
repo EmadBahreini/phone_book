@@ -71,6 +71,7 @@ class _RetrofitClient implements RetrofitClient {
   Future<Contact> deleteContact(contactId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =

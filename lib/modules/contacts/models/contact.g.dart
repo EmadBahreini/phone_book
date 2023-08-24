@@ -7,7 +7,7 @@ part of 'contact.dart';
 // **************************************************************************
 
 Contact _$ContactFromJson(Map<String, dynamic> json) => Contact(
-      id: json['id'] as int?,
+      id: json['_id'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       email: json['email'] as String?,
@@ -16,10 +16,11 @@ Contact _$ContactFromJson(Map<String, dynamic> json) => Contact(
           ?.map((e) => e as String?)
           .toList(),
       phone: json['phone'] as String?,
+      errorMessage: json['error'] as String?,
     );
 
 Map<String, dynamic> _$ContactToJson(Contact instance) => <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'email': instance.email,
