@@ -10,6 +10,7 @@ class ContactsBloc extends ChangeNotifier {
   bool loading = false;
   bool createLoading = false;
   bool deleteLoading = false;
+  bool editLoading = false;
 
   Future<void> loadContacts() async {
     loading = true;
@@ -75,6 +76,30 @@ class ContactsBloc extends ChangeNotifier {
       errorLog(e);
     }
     deleteLoading = false;
+    notifyListeners();
+    return false;
+  }
+
+  Future<bool> editContact(Contact contact) async {
+    editLoading = true;
+    notifyListeners();
+    try {
+      var res = await ApiClient().retrofitClient.editContact(contact.id, contact: contact);
+      if (res.errorMessage == null) {
+        Toast.show('Contact updated successfully!', type: ToastType.success);
+        editLoading = false;
+        loadContacts();
+        return true;
+      } else {
+        Toast.show(res.errorMessage!);
+        editLoading = false;
+        notifyListeners();
+        return false;
+      }
+    } catch (e) {
+      errorLog(e);
+    }
+    editLoading = false;
     notifyListeners();
     return false;
   }

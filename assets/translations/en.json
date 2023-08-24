@@ -9,5 +9,6 @@
   "try_add": "Try to add one!",
   "open_link_error": "Can not open the link",
   "phone_error": "Phone number is invalid",
-  "contact_info": "Contact info"
+  "contact_info": "Contact info",
+  "edit_contact": "Edit contact"
 }

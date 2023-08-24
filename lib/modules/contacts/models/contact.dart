@@ -30,4 +30,11 @@ class Contact {
   final String? errorMessage;
 
   Map<String, dynamic> toJson() => _$ContactToJson(this);
+
+  bool isChanged(Contact contact) =>
+      firstName?.trim() != contact.firstName?.trim() ||
+      lastName?.trim() != contact.lastName?.trim() ||
+      email?.trim() != contact.email?.trim() ||
+      notes?.trim() != contact.notes?.trim() ||
+      phone?.trim() != contact.phone?.trim();
 }

@@ -58,12 +58,10 @@ class ApiClient {
   }
 
   void onRequest(RequestOptions requestOptions, RequestInterceptorHandler handler) {
-    infoLog(requestOptions.data);
     handler.next(requestOptions);
   }
 
   Future<void> onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) async {
-    wtfLog(response.data);
     handler.next(response);
   }
 }

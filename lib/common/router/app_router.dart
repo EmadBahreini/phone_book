@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:phone_book/modules/contacts/models/contact.dart';
 import 'package:phone_book/modules/contacts/ui/pages/create_contact_page.dart';
 import 'package:phone_book/modules/contacts/ui/pages/contacts_details_page.dart';
+import 'package:phone_book/modules/contacts/ui/pages/edit_contact_page.dart';
 
 import '../../modules/contacts/ui/pages/contacts_list._page.dart';
 import '../ui/components/error_page.dart';
@@ -12,6 +13,7 @@ class R {
   static const String contactsList = '/';
   static const String createContact = '/create';
   static const String contactsDetails = '/details';
+  static const String editContact = '/edit';
 }
 
 class AppRouter {
@@ -32,6 +34,12 @@ class AppRouter {
           _route(
             path: R.contactsDetails.replaceAll('/', ''),
             pageBuilder: (state) => ContactsDetailsPage(
+              contact: state.extra as Contact,
+            ),
+          ),
+          _route(
+            path: R.editContact.replaceAll('/', ''),
+            pageBuilder: (state) => EditContactPage(
               contact: state.extra as Contact,
             ),
           ),

@@ -7,7 +7,7 @@ import '../../../../common/utils/launcher_helper.dart';
 
 class ContactInfoWidget extends StatelessWidget {
   const ContactInfoWidget({required this.contact, super.key});
-  final Contact contact;
+  final Contact? contact;
   @override
   Widget build(BuildContext context) => Container(
         width: double.infinity,
@@ -28,29 +28,29 @@ class ContactInfoWidget extends StatelessWidget {
               ),
             ),
             ListTile(
-              onTap: () => LauncherHelper.launchCall(contact.phone),
+              onTap: () => LauncherHelper.launchCall(contact?.phone),
               leading: Icon(
                 Icons.phone_outlined,
                 color: context.colors.primary.dark,
               ),
-              title: Text(contact.phone ?? ''),
+              title: Text(contact?.phone ?? ''),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    onPressed: () => LauncherHelper.launchSMS(contact.phone),
+                    onPressed: () => LauncherHelper.launchSMS(contact?.phone),
                     icon: const Icon(Icons.chat_outlined),
                   )
                 ],
               ),
             ),
             ListTile(
-              onTap: () => LauncherHelper.launchEmail(contact.email),
+              onTap: () => LauncherHelper.launchEmail(contact?.email),
               leading: Icon(
                 Icons.mail_outline_rounded,
                 color: context.colors.primary.dark,
               ),
-              title: Text(contact.email ?? ''),
+              title: Text(contact?.email ?? ''),
             )
           ],
         ),

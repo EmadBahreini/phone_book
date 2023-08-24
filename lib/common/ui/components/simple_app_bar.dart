@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../style/colorPalette/color_palette.dart';
 
@@ -39,8 +40,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
         leading: haveLeading
             ? IconButton(
-                icon: Icon(backLeading ? Icons.arrow_back : Icons.close, size: 24),
-                onPressed: () => Navigator.pop(context))
+                icon: Icon(backLeading ? Icons.arrow_back : Icons.close, size: 24), onPressed: () => context.pop())
             : null,
         actions: actions,
         shadowColor: ColorPalette.of(context).shadow.withOpacity(0.30),

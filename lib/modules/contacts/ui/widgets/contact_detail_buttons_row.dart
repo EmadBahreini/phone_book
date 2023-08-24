@@ -6,7 +6,7 @@ import '../../../../common/utils/launcher_helper.dart';
 
 class ContactDetailButtonRow extends StatelessWidget {
   const ContactDetailButtonRow({required this.contact, super.key});
-  final Contact contact;
+  final Contact? contact;
   @override
   Widget build(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -21,7 +21,7 @@ class ContactDetailButtonRow extends StatelessWidget {
                   color: context.colors.primary.withOpacity(0.3),
                 ),
                 child: IconButton(
-                  onPressed: () => LauncherHelper.launchCall(contact.phone),
+                  onPressed: () => LauncherHelper.launchCall(contact?.phone),
                   icon: Icon(
                     Icons.call_outlined,
                     color: context.colors.primary.dark,
@@ -47,7 +47,7 @@ class ContactDetailButtonRow extends StatelessWidget {
                   color: context.colors.primary.withOpacity(0.3),
                 ),
                 child: IconButton(
-                  onPressed: () => LauncherHelper.launchSMS(contact.phone),
+                  onPressed: () => LauncherHelper.launchSMS(contact?.phone),
                   icon: Icon(
                     Icons.chat_outlined,
                     color: context.colors.primary.dark,
@@ -73,7 +73,7 @@ class ContactDetailButtonRow extends StatelessWidget {
                   color: context.colors.primary.withOpacity(0.3),
                 ),
                 child: IconButton(
-                  onPressed: () => LauncherHelper.launchEmail(contact.email),
+                  onPressed: () => LauncherHelper.launchEmail(contact?.email),
                   icon: Icon(
                     Icons.email_outlined,
                     color: context.colors.primary.dark,

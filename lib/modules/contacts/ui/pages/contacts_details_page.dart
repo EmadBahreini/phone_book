@@ -3,17 +3,32 @@ import 'package:go_router/go_router.dart';
 import 'package:phone_book/common/style/colorPalette/color_palette_helper.dart';
 import 'package:phone_book/common/ui/components/cached_image_component.dart';
 import 'package:phone_book/common/ui/components/page_component.dart';
-import 'package:phone_book/common/ui/widgets/loading_widget.dart';
+import 'package:phone_book/common/ui/toast.dart';
 import 'package:phone_book/modules/contacts/bloc/contacts_bloc.dart';
 import 'package:phone_book/modules/contacts/models/contact.dart';
 import 'package:phone_book/modules/contacts/ui/widgets/contact_detail_buttons_row.dart';
 import 'package:phone_book/modules/contacts/ui/widgets/contact_info_widget.dart';
 import 'package:provider/provider.dart';
 
-class ContactsDetailsPage extends StatelessWidget {
-  ContactsDetailsPage({required this.contact, Key? key}) : super(key: key);
+import '../../../../common/router/app_router.dart';
+
+class ContactsDetailsPage extends StatefulWidget {
+  const ContactsDetailsPage({required this.contact, Key? key}) : super(key: key);
   final Contact contact;
+
+  @override
+  State<ContactsDetailsPage> createState() => _ContactsDetailsPageState();
+}
+
+class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
   final MenuController controller = MenuController();
+  Contact? tempContact;
+  @override
+  void initState() {
+    super.initState();
+    tempContact = widget.contact;
+  }
+
   @override
   Widget build(BuildContext context) => PageComponent(
         alwaysElevation: true,
@@ -21,7 +36,14 @@ class ContactsDetailsPage extends StatelessWidget {
         backLeading: true,
         appBarActions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              var newContact = await context.push<Contact>(R.editContact, extra: widget.contact);
+              if (newContact != null) {
+                setState(() {
+                  tempContact = newContact;
+                });
+              }
+            },
             icon: const Icon(
               Icons.edit_outlined,
               size: 24,
@@ -47,20 +69,14 @@ class ContactsDetailsPage extends StatelessWidget {
                 enabled: !context.select<ContactsBloc, bool>((bloc) => bloc.deleteLoading),
                 title: Padding(
                   padding: const EdgeInsets.only(right: 80.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Delete',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: context.colors.error.dark),
-                      ),
-                      const SizedBox(width: 8),
-                      if (context.select<ContactsBloc, bool>((bloc) => bloc.deleteLoading)) const LoadingWidget()
-                    ],
+                  child: Text(
+                    'Delete',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: context.colors.error.dark),
                   ),
                 ),
                 onTap: () async {
                   controller.close();
-                  if (await Provider.of<ContactsBloc>(context, listen: false).deleteContact(contact)) {
+                  if (await Provider.of<ContactsBloc>(context, listen: false).deleteContact(widget.contact)) {
                     if (context.mounted) {
                       context.pop();
                     }
@@ -81,7 +97,7 @@ class ContactsDetailsPage extends StatelessWidget {
             children: [
               Center(
                 child: CachedImageComponent(
-                  contact.picture?.firstOrNull,
+                  tempContact?.picture?.firstOrNull,
                   width: MediaQuery.of(context).size.width / 2,
                   height: MediaQuery.of(context).size.width / 2,
                   radius: 100,
@@ -90,12 +106,12 @@ class ContactsDetailsPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(
-                  '${contact.firstName} ${contact.lastName}',
+                  '${tempContact?.firstName} ${tempContact?.lastName}',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
-              ContactDetailButtonRow(contact: contact),
-              ContactInfoWidget(contact: contact),
+              ContactDetailButtonRow(contact: tempContact),
+              ContactInfoWidget(contact: tempContact),
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -115,7 +131,7 @@ class ContactsDetailsPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      contact.notes ?? '',
+                      tempContact?.notes ?? '',
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium
